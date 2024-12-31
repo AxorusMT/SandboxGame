@@ -1,0 +1,7 @@
+{
+  "dependencies": [
+    "miniaudio",
+    "glfw3",
+    "imgui"
+  ]
+}
