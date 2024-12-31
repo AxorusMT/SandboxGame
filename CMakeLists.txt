@@ -13,6 +13,6 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 
 add_executable(SandboxGame ${CMAKE_SOURCE_DIR}/Source/Game/main.cpp)
-target_include_directories(SandboxGame PRIVATE ${CMAKE_SOURCE_DIR}/Packages/Vendor/include)
+target_include_directories(SandboxGame PRIVATE ${CMAKE_SOURCE_DIR}/Packages/include)
 target_link_libraries(SandboxGame PRIVATE glfw)
 target_link_libraries(SandboxGame PRIVATE imgui::imgui)
