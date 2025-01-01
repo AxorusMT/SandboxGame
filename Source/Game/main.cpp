@@ -1,7 +1,10 @@
+#pragma check_stack(off)
+
 #define SOKOL_IMPL
 #define SOKOL_GLCORE // using opengl
 #define FONTSTASH_IMPLEMENTATION
 #define SOKOL_IMGUI_NO_SOKOL_APP 
+#define STB_IMAGE_IMPLEMENTATION
 #include <cstdio>
 #include <cstdlib>
 #include "fontstash/fontstash.h"
@@ -9,7 +12,7 @@
 #include "sokol/util/sokol_gl.h"
 #include "sokol/util/sokol_fontstash.h"
 #include "sokol/sokol_fetch.h"
-
+#include "stb_image.h"
 
 //#include <imgui.h>
 //#include "sokol/util/sokol_imgui.h"
@@ -17,6 +20,7 @@
 #include <print>
 #include <string>
 #include <cmath>
+#include <cstdlib>
 #include <GLFW/glfw3.h>
 
 void basicLogger(const char* tag, uint32_t log_level, uint32_t log_item_id, const char* message, uint32_t line, const char* filename, void* data) {
@@ -50,10 +54,48 @@ void basicLogger(const char* tag, uint32_t log_level, uint32_t log_item_id, cons
     );
 }
 
+sg_image tex = {};
+
+void image_callback(const sfetch_response_t* response) {
+    if (response->fetched) {
+        int pngwidth, pngheight, pngchannels;
+        constexpr int idealchannels = 4;
+        stbi_uc* pixels = stbi_load_from_memory(
+            (stbi_uc*)response->data.ptr,
+            (int)response->data.size, 
+            &pngwidth,
+            &pngheight,
+            &pngchannels,
+            idealchannels
+        );
+
+        if (pixels) {
+            std::println("image was loaded!");
+            sg_image_desc loaded_image_desc = {
+                .width = pngwidth,
+                .height = pngheight,
+                .pixel_format = SG_PIXELFORMAT_RGBA8, // Change this for some wackiness!
+            };
+
+            loaded_image_desc.data.subimage[0][0] = {
+                .ptr = pixels,
+                .size = (size_t)(pngwidth * pngheight * 4) // i guess w * h * 4 (rgba) per pixel?
+            };
+
+            tex = sg_make_image(loaded_image_desc);
+
+            stbi_image_free(pixels);
+        }
+    } else {
+        std::println("response failed!");
+    }
+}
+
 FONScontext* fons;
 float dpi = 96.0f; // TODO: Make this actually find the dpi, glfw has some functions for it
 int font;
-uint8_t font_data[256 * 1024];
+uint8_t* font_data = (uint8_t*) std::malloc(256 * 1024);
+// sg_bindings bindings = {};
 
 const char* fileutil_get_path(const char* filename, char* buf, size_t buf_size) {
     snprintf(buf, buf_size, "%s", filename);
@@ -110,6 +152,13 @@ int main() {
 
     sgl_setup(gl_desc);
 
+    sg_sampler_desc sampler_desc = {
+        .min_filter = SG_FILTER_LINEAR,
+        .mag_filter = SG_FILTER_LINEAR
+    };
+
+    sg_sampler sampler = sg_make_sampler(sampler_desc);
+
    // simgui_desc_t imgui_desc = {
    //     .logger = {
    //         .func = basicLogger
@@ -156,18 +205,31 @@ int main() {
     char pathbuf[2048];
 
     sfetch_request_t fetch_request = {
-        .path = fileutil_get_path("droid.ttf", pathbuf, sizeof(pathbuf)),
+        .path = fileutil_get_path("SourceCodePro-Regular.ttf", pathbuf, sizeof(pathbuf)),
         .callback = onFontLoad,
         .buffer = SFETCH_RANGE(font_data)
     };
 
     sfetch_send(fetch_request);
 
+    // images
+
+    int* file_buffer = (int*)std::malloc(256 * 1024);
+
+    sfetch_request_t image_fetch_request = {
+        .path = fileutil_get_path("opengl.png", pathbuf, sizeof(pathbuf)),
+        .callback = image_callback,
+        .buffer = SFETCH_RANGE(file_buffer)
+    };
+
+    sfetch_send(image_fetch_request);
+
     sg_pass_action pass_action{};
     pass_action.colors[0] = {
         .load_action = SG_LOADACTION_CLEAR,
         .clear_value = {0.18f, 0.21f, 0.5f, 1.0f}
     };
+
 
     sg_pass pass = {
         .action = pass_action,
@@ -210,7 +272,7 @@ int main() {
         */
         sgl_ortho(0.0f, 1280.f, 720.f, 0.f, -1.0f, 1.0f); 
         fonsSetFont(fons, font);
-        fonsSetSize(fons, 24.f);
+        fonsSetSize(fons, 16.f);
 
         constexpr float start_x = 375.f;
         float x = start_x;
@@ -309,6 +371,16 @@ int main() {
 
         sgl_end();
 
+        sgl_enable_texture();
+        sgl_texture(tex, sampler);
+
+        // sgl_begin_quads(); // Start drawing quads
+        // sgl_v2f_t2f(0.0f, 0.0f, 0.0f, 0.0f); // Bottom-left corner, UV (0,0)
+        // sgl_v2f_t2f(100.0f, 0.0f, 1.0f, 0.0f); // Bottom-right corner, UV (1,0)
+        // sgl_v2f_t2f(100.0f, 100.0f, 1.0f, 1.0f); // Top-right corner, UV (1,1)
+        // sgl_v2f_t2f(0.0f, 100.0f, 0.0f, 1.0f); // Top-left corner, UV (0,1)
+        // sgl_end();
+
         sgl_draw();
 
         //simgui_render();
@@ -320,6 +392,9 @@ int main() {
 
         frame++;
     }
+
+    std::free(font_data);
+    std::free(file_buffer);
 
     sfetch_shutdown();
     sfons_destroy(fons);
