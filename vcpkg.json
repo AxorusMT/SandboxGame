@@ -3,6 +3,8 @@
     "miniaudio",
     "glfw3",
     "imgui",
-    "stb"
+    "stb",
+    "sdl2",
+    "raylib"
   ]
 }
