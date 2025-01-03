@@ -14,7 +14,7 @@ find_package(imgui CONFIG REQUIRED)
 find_package(Stb REQUIRED)
 find_package(raylib CONFIG REQUIRED)
 
-add_executable(SandboxGame ${CMAKE_SOURCE_DIR}/Source/Game/main.cpp)
+add_executable(SandboxGame ${CMAKE_SOURCE_DIR}/Source/Game/main.cpp ${CMAKE_SOURCE_DIR}/Source/Engine/Base.hpp)
 target_include_directories(SandboxGame PRIVATE ${CMAKE_SOURCE_DIR}/Packages/include)
 target_include_directories(SandboxGame PRIVATE ${Stb_INCLUDE_DIR})
 
