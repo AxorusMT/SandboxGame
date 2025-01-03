@@ -1,0 +1,50 @@
+\doxysection{Vector2.\+hpp}
+\hypertarget{_vector2_8hpp_source}{}\label{_vector2_8hpp_source}\index{Source/Engine/Math/Vector2.hpp@{Source/Engine/Math/Vector2.hpp}}
+\mbox{\hyperlink{_vector2_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_base_8hpp}{Engine/Base/Base.hpp}}"{}}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <concepts>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}glm/glm.hpp"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}glm/vec2.hpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}glm/gtc/matrix\_transform.hpp"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_engine_1_1_concepts}{Engine::Concepts}}\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{concept\ }\mbox{\hyperlink{concept_engine_1_1_concepts_1_1_numeric}{Numeric}}\ =\ std::integral<T>\ ||\ std::floating\_point<T>;}
+\DoxyCodeLine{00010\ \}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_engine_1_1_math}{Engine::Math}}\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{template}\ <Engine::Concepts::Numeric\ T>}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_engine_1_1_math_1_1_vector2}{Vector2}}\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2_aa44a8f7d29025a2ccd2fdc9d23981a89}{Vector2}}(T\ x,\ T\ y);}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2}{Vector2}}\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2_aa910addb08640add48af5c0c806ccef8}{up}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2}{Vector2}}\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2_ad8720f15b93461c9cb812872a6da3fb5}{down}}();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2}{Vector2}}\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2_a9b03ba0aae84d8fd2e52b83a6ec0a6dc}{left}}();}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2}{Vector2}}\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2_a0ee784594aca3f767b040dcd7cd83181}{right}}();}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2}{Vector2}}\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2_af0370ba8b278cf9f9fd83491350f44b6}{zero}}();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2_a0664932eb971138ab298cbbaf5e58668}{getLength}}();}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ T\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2_ac348099667a9197d9d7b3b7b8413710c}{getX}}();}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ T\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2_a276b30614367a9e1f393828335d3dcbf}{getY}}();}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2_a7483eb8990c042516dfabdb751a34d3d}{setX}}(T\ x);\ }
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2_a646bb9a3a5da110532a5d6adf797e0de}{setY}}(T\ y);}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2}{Vector2}}\ \mbox{\hyperlink{class_engine_1_1_math_1_1_vector2_a9257b119695fd3ac20215101cf8eae23}{getNormalized}}();}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ glm::vec<2,\ T>\ vector;}
+\DoxyCodeLine{00105\ \ \ \ \ \};}
+\DoxyCodeLine{00106\ \}}
+\DoxyCodeLine{00107\ }
+
+\end{DoxyCode}

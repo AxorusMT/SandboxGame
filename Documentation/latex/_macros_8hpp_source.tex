@@ -1,0 +1,36 @@
+\doxysection{Macros.\+hpp}
+\hypertarget{_macros_8hpp_source}{}\label{_macros_8hpp_source}\index{Source/Engine/Base/Macros.hpp@{Source/Engine/Base/Macros.hpp}}
+\mbox{\hyperlink{_macros_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{}}
+\DoxyCodeLine{00003\ \textcolor{comment}{This\ engine\ uses\ its\ own\ unique\ format\ for\ macros,\ depending\ on\ the\ type\ of\ macro:}}
+\DoxyCodeLine{00004\ \textcolor{comment}{}}
+\DoxyCodeLine{00005\ \textcolor{comment}{Feature\ flags:}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ \ \ \ Feature\ flag\ macros\ are\ in\ ALL\_CAPS,\ and\ have\ FLAG\_\ before\ them,\ e.g.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ \ \ \ \ \ \ \ FLAG\_IS\_LINUX}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ \ \ \ \ \ \ \ FLAG\_IS\_32\_BIT}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ \ \ \ \ \ \ \ FLAG\_IS\_DEBUG}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ \ \ \ \ \ \ \ FLAG\_USE\_EXCEPTIONS}}
+\DoxyCodeLine{00011\ \textcolor{comment}{}}
+\DoxyCodeLine{00012\ \textcolor{comment}{Functions:}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ \ \ \ Many\ function\ macros\ deviate\ heavvily\ from\ normal\ convention,\ and\ use\ a\ system\ known\ as\ "{}dollar\ macros"{},}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ \ where\ the\ macro\ is\ in\ the\ form:}}
+\DoxyCodeLine{00015\ \textcolor{comment}{}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ \ \ \ \ \ \ \ \$PascalCaseName(arg1,\ arg2,\ ...,\ argn)}}
+\DoxyCodeLine{00017\ \textcolor{comment}{}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ \ \ \ e.g.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ \ \ \ \ \ \$ErrorIf(string)}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ \ \ \ \ \ \$TestCase(name)}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ \ \ \ \ \ \ \ \$Trace()}}
+\DoxyCodeLine{00022\ \textcolor{comment}{}}
+\DoxyCodeLine{00023\ \textcolor{comment}{All\ Feature\ flag\ macros\ should\ be\ undefined\ before\ their\ original\ defintion}}
+\DoxyCodeLine{00024\ \textcolor{comment}{}}
+\DoxyCodeLine{00025\ \textcolor{comment}{Macros\ should\ only\ be\ used\ when\ necessary,\ and\ not\ randomly.\ Prefer\ C++\ over\ macros}}
+\DoxyCodeLine{00026\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ }
+
+\end{DoxyCode}

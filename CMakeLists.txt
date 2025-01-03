@@ -13,11 +13,18 @@ project(SandboxGame)
 find_package(imgui CONFIG REQUIRED)
 find_package(Stb REQUIRED)
 find_package(raylib CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
 
-add_executable(SandboxGame ${CMAKE_SOURCE_DIR}/Source/Game/main.cpp)
+file(GLOB_RECURSE SRC ${CMAKE_SOURCE_DIR}/Source/**.cpp)
+file(GLOB_RECURSE HEADER ${CMAKE_SOURCE_DIR}/Source/**.hpp)
+
+add_executable(SandboxGame ${SRC} ${HEADER})
+
 target_include_directories(SandboxGame PRIVATE ${CMAKE_SOURCE_DIR}/Packages/include)
+target_include_directories(SandboxGame PRIVATE ${CMAKE_SOURCE_DIR}/Source)
 target_include_directories(SandboxGame PRIVATE ${Stb_INCLUDE_DIR})
 
 target_link_libraries(SandboxGame PRIVATE imgui::imgui)
 target_link_libraries(SandboxGame PRIVATE raylib)
+target_link_libraries(SandboxGame PRIVATE glm::glm)
 

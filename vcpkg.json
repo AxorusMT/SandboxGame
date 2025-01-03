@@ -5,6 +5,7 @@
     "imgui",
     "stb",
     "sdl2",
-    "raylib"
+    "raylib",
+    "glm"
   ]
 }
